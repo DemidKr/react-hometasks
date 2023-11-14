@@ -76,16 +76,22 @@ export const dices = (diceNumber: number) => {
 
 export const HomeWork1 = () => {
   const [value, setValue] = useState(6);
+  const [isShaking, setIsShaking] = useState(true)
 
   const handleRoll = () => {
-    // random number from 1 to 6
-    const newValue = randomIntFromInterval(1, 6)
-    setValue(newValue)
+      // random number from 1 to 6
+      const newValue = randomIntFromInterval(1, 6)
+      setIsShaking(true)
+      setValue(newValue)
   };
 
   return <div className="centered-container">
       <h2>Нажми на меня!</h2>
-    <div onClick={handleRoll} className="dice-container">
+    <div
+        onClick={handleRoll}
+        onAnimationEnd={() => setIsShaking(false)}
+        className={isShaking ? "dice-container shaking" : "dice-container"}
+    >
       {dices(value)}
     </div>
   </div>
